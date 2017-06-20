@@ -7,7 +7,7 @@ from __future__ import print_function
 
 import chess
 import chess.uci
-import chess.variant
+from chess.variant import find_variant
 import time
 import argparse
 import itertools
@@ -132,7 +132,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG if args.debug else logging.WARNING)
 
     # Find variant.
-    VariantBoard = chess.variant.find_variant(args.variant)
+    VariantBoard = find_variant(args.variant)
 
     # Open engine.
     engine = chess.uci.popen_engine(args.engine)
