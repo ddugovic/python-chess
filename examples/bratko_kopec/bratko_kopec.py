@@ -26,12 +26,21 @@ def test_epd(engine, epd, VariantBoard, threads, movetime):
 
     engine.ucinewgame()
     engine.setoption({
+#        "MultiPV": 4,
         "UCI_Variant": VariantBoard.uci_variant,
         "Threads": threads
     })
     engine.position(position)
 
+#    solution = []
+#    handler = chess.uci.InfoHandler()
+#    engine.info_handlers.append(handler)
+
     enginemove, pondermove = engine.go(movetime=movetime)
+#    with handler as info:
+#        for x in info["pv"]:
+#            if info["score"][x] == info["score"][1]:
+#                solution.append(position.san(info["pv"][x][0]))
 
     if "am" in epd_info and enginemove in epd_info["am"]:
         print("%s: %s | +0" % (epd_string, position.san(enginemove)))
