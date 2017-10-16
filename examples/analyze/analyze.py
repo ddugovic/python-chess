@@ -60,9 +60,11 @@ if __name__ == "__main__":
     # Load PGN.
     for database in args.pgn:
         game = chess.pgn.read_game(database)
-        for move in game.main_line():
-            position.push(move)
-            annotate_pgn(engine, position, args.threads, args.movetime)
+        while game != None:
+            for move in game.main_line():
+                position.push(move)
+                annotate_pgn(engine, position, args.threads, args.movetime)
+            game = chess.pgn.read_game(database)
 
     # Run each test line.
     score = 0.0
