@@ -61,7 +61,7 @@ if __name__ == "__main__":
     for database in args.pgn:
         game = chess.pgn.read_game(database)
         for move in game.main_line():
-            position.push_uci(move.uci())
+            position.push(move)
             annotate_pgn(engine, position, args.threads, args.movetime)
 
     # Run each test line.
